@@ -1,7 +1,7 @@
 const games = [
-    {title: "Каркассон", players: 4, borrower: null},
-    {title: "Доббль", players: 6, borrower: 'Аня'},
-    {title: "Шахматы", players: 2, borrower: null}
+    { title: "Каркассон", players: 4, borrower: null },
+    { title: "Доббль", players: 6, borrower: 'Аня' },
+    { title: "Шахматы", players: 2, borrower: null }
 ]
 
 const borrowButton = document.getElementById('borrowButton')
@@ -17,15 +17,21 @@ function renderGames() {
     gameList.innerHTML = ''
     games.forEach((el) => {
         const li = document.createElement('li')
-        if (el.borrower === null) {
-            li.append(`${el.title} - ${el.players} - Свободно`)
-        } else {
-            li.append(`${el.title} - ${el.players} - взял(а) ${el.borrower}`)
-        }  
         if (showHint.checked === true) {
-            // Дописать код, начал делать второе
+            if (el.borrower === null) {
+                li.append(`${el.title} - ${el.players} - Свободно`)
+                gameList.append(li)
+            }
         }
-        gameList.append(li)
+        else if (showHint.checked === false) {
+            if (el.borrower = null) {
+                li.append(`${el.title} - ${el.players} - Свободно`)
+            } else if (el.borrower !== '') {
+                li.append(`${el.title} - ${el.players} - взял(а) ${el.borrower}`)
+                //li.append(`${el.title} - ${el.players} - Свободно`)
+                gameList.append(li)
+            }``
+        }
         console.log(gameList)
     });
 }
