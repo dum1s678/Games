@@ -1,7 +1,7 @@
 const games = [
-    {title: "Каркассон", players: 4, borrower: null},
-    {title: "Доббль", players: 6, borrower: 'Аня'},
-    {title: "Шахматы", players: 2, borrower: null}
+    { title: "Каркассон", players: 4, borrower: null },
+    { title: "Доббль", players: 6, borrower: 'Аня' },
+    { title: "Шахматы", players: 2, borrower: null }
 ]
 
 const borrowButton = document.getElementById('borrowButton')
@@ -12,21 +12,28 @@ const borrowerName = document.getElementById('borrowerName')
 const errorName = document.getElementById('ErrorName')
 const message = document.getElementById('message')
 const showHint = document.getElementById('showHint')
+const addButton = document.getElementById('addButton')
+const nameGame = document.getElementById('NameGame')
+const quantityPlayers = document.getElementById('QuantityPlayers')
 
 function renderGames() {
     gameList.innerHTML = ''
     games.forEach((el) => {
         const li = document.createElement('li')
-        if (el.borrower === null) {
-            li.append(`${el.title} - ${el.players} - Свободно`)
-        } else {
-            li.append(`${el.title} - ${el.players} - взял(а) ${el.borrower}`)
-        }  
         if (showHint.checked === true) {
-            // Дописать код, начал делать второе
+            if (el.borrower === null) {
+                li.append(`${el.title} - ${el.players} - Свободно`)
+                gameList.append(li)
+            }
         }
-        gameList.append(li)
-        console.log(gameList)
+        else {
+            if (el.borrower === null) {
+                li.append(`${el.title} - ${el.players} - Свободно`)
+            } else {
+                li.append(`${el.title} - ${el.players} - взял(а) ${el.borrower}`)
+            }
+            gameList.append(li)
+        }
     });
 }
 
@@ -56,6 +63,20 @@ returnButton.addEventListener('click', () => {
     let selectedGame = games[Number(selectGame.value)]
     if (selectedGame.borrower !== null) {
         selectedGame.borrower = null
+    }
+    renderGames();
+})
+
+addButton.addEventListener('click', () => {
+    const nameGameValue = nameGame.value
+    const quantityPlayersValue = quantityPlayers.value
+    if (nameGameValue !== '' && quantityPlayersValue > 0) {
+        const newGame = {
+            title: nameGameValue,
+            players: quantityPlayersValue,
+            borrower: null
+        }
+        games.push(newGame)
     }
     renderGames();
 })
