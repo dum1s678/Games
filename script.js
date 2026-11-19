@@ -1,9 +1,3 @@
-const games = [
-    { title: "Каркассон", players: 4, borrower: null },
-    { title: "Доббль", players: 6, borrower: 'Аня' },
-    { title: "Шахматы", players: 2, borrower: null }
-]
-
 const borrowButton = document.getElementById('borrowButton')
 const returnButton = document.getElementById('returnButton')
 const selectGame = document.getElementById('gameSelect')
@@ -15,6 +9,14 @@ const showHint = document.getElementById('showHint')
 const addButton = document.getElementById('addButton')
 const nameGame = document.getElementById('NameGame')
 const quantityPlayers = document.getElementById('QuantityPlayers')
+
+const games = [
+    { title: "Каркассон", players: 4, borrower: null },
+    { title: "Доббль", players: 6, borrower: 'Аня' },
+    { title: "Шахматы", players: 2, borrower: null }
+]
+
+renderGameOptions();
 
 function renderGames() {
     gameList.innerHTML = ''
@@ -37,6 +39,19 @@ function renderGames() {
     });
 }
 
+function renderGameOptions() {
+    selectGame.innerHTML = ''
+    let count = 0
+    games.forEach((el) => {
+        const option = document.createElement('option')
+        option.textContent = el.title
+        option.value = count
+        selectGame.append(option)
+        count ++
+    })
+    renderGames();
+}
+
 function clear() {
     message.innerHTML = ''
     errorName.innerHTML = ''
@@ -57,6 +72,7 @@ borrowButton.addEventListener('click', () => {
     }
     renderGames();
 })
+renderGameOptions();
 
 returnButton.addEventListener('click', () => {
     clear();
@@ -79,6 +95,7 @@ addButton.addEventListener('click', () => {
         games.push(newGame)
     }
     renderGames();
+    renderGameOptions();
 })
 
 showHint.addEventListener('change', () => {
@@ -86,4 +103,3 @@ showHint.addEventListener('change', () => {
 })
 
 renderGames();
-
