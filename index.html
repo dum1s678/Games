@@ -11,28 +11,40 @@
 </head>
 
 <body>
-    <h1>Прокат настольных игр</h1>
-    <label for="showHint">Только свободные:</label>
-    <input type="checkbox" id="showHint">
-    <ul id="gameList"></ul>
+    <div class="list">
+        <h1>Прокат настольных игр</h1>
+        <div class="list__free">
+            <label for="showHint">Только свободные:</label>
+            <input type="checkbox" id="showHint">
+        </div>
+        <ul id="gameList"></ul>
+    </div>
 
-    <label for="gameSelect">Игра</label>
-    <select id="gameSelect"></select>
-
-    <label for="borrowerName">Имя посетителя</label>
-    <input id="borrowerName" type="text">
-    <p id="ErrorName"></p>
-    <button id="borrowButton" type="button">Выдать</button>
-    <button id="returnButton" type="button">Вернуть</button>
-    <br>
-    <label for="NameGame">Введите название игры:</label>
-    <input type="text" name="" id="NameGame">
-    <label for="QuantityPlayers">Введите число игроков:</label>
-    <input type="number" name="" id="QuantityPlayers">
-    <label for="QuantityCopy">Введите число копий игры:</label>
-    <input type="number" name="" id="QuantityCopy">
-    <button id="addButton" type="button">Добавить игру</button>
-    <p id="message"></p>
+    <div class="section">
+        <label for="gameSelect">Игра</label>
+        <select id="gameSelect"></select>
+        <label for="borrowerName">Имя посетителя</label>
+        <input id="borrowerName" type="text">
+        <p id="ErrorName"></p>
+        <button id="borrowButton" type="button">Выдать</button>
+        <button id="returnButton" type="button">Вернуть</button>
+    </div>
+    <div class="section2">
+        <div class="section2__name">
+            <label for="NameGame">Введите название игры:</label>
+            <input type="text" name="" id="NameGame">
+        </div>
+        <div class="section2__players">
+            <label for="QuantityPlayers">Введите число игроков:</label>
+            <input type="number" name="" id="QuantityPlayers">
+        </div>
+        <div class="section2__copy">
+            <label for="QuantityCopy">Введите число копий игры:</label>
+            <input type="number" name="" id="QuantityCopy">
+        </div>
+        <button id="addButton" type="button">Добавить игру</button>
+        <p id="message"></p>
+    </div>
 </body>
 
 </html>
