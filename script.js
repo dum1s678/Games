@@ -9,42 +9,43 @@ const showHint = document.getElementById('showHint')
 const addButton = document.getElementById('addButton')
 const nameGame = document.getElementById('NameGame')
 const quantityPlayers = document.getElementById('QuantityPlayers')
+const quantityCopy = document.getElementById('QuantityCopy')
 
 const games = [
-    { title: "Каркассон", players: 4, borrower: [], quantity: 4},
-    { title: "Доббль", players: 6, borrower: ['Аня'], quantity: 5},
-    { title: "Шахматы", players: 2, borrower: [], quantity: 3}
+    { title: "Каркассон", players: 4, borrower: [], quantity: 4 },
+    { title: "Доббль", players: 6, borrower: ['Аня'], quantity: 5 },
+    { title: "Шахматы", players: 2, borrower: [], quantity: 3 }
 ]
-
-renderGameOptions();
 
 function renderGames() {
     gameList.innerHTML = ''
     games.forEach((el) => {
         const li = document.createElement('li')
         const freeGameCopy = el.quantity - el.borrower.length
-        
+
         if (showHint.checked === true) {
-            if (freeGameCopy > 0) {
-                li.append(`${el.title} - ${el.players} - Свободно - ${freeGameCopy} шт.`)
-                gameList.append(li)
-            }
-        }
-        else {
             if (el.borrower.length === 0) {
-                li.append(`${el.title} - ${el.players} - Свободно - ${freeGameCopy} шт.`)
-            } else {
-                li.append(`${el.title} - ${el.players} - взял(а) ${el.borrower.join(', ')} - ${freeGameCopy} шт.`)
+                li.append(`${el.title} - ${el.players} игрок. - Свободно - ${freeGameCopy} шт.`)
+            }
+            gameList.append(li)
+        } else {
+            if (el.borrower.length === 0) {
+                li.append(`${el.title} - ${el.players} игрок. - Свободно - ${freeGameCopy} шт.`)
+            }
+            else {
+                li.append(`${el.title} - ${el.players} игрок. - взял(а) ${el.borrower} - ${freeGameCopy} шт.`)
             }
             gameList.append(li)
         }
-    });
+        })
 }
+
+
 
 function renderGameOptions() {
     selectGame.innerHTML = ''
     let count = 0
-    
+
     games.forEach((el) => {
         const option = document.createElement('option')
         option.textContent = el.title
@@ -64,7 +65,7 @@ borrowButton.addEventListener('click', () => {
     clear();
     let selectedGame = games[Number(selectGame.value)]
     const name = borrowerName.value.trim()
-    
+
     if (name === '') {
         errorName.innerHTML = 'Введите имя'
         return
@@ -77,7 +78,7 @@ borrowButton.addEventListener('click', () => {
         message.innerHTML = "Все копии игры уже выданы"
         return
     }
-    
+
     selectedGame.borrower.push(name)
     renderGames()
 })
@@ -88,7 +89,7 @@ returnButton.addEventListener('click', () => {
     let selectedGame = games[Number(selectGame.value)]
     const name = borrowerName.value.trim()
     const idx = selectedGame.borrower.indexOf(name)
-    
+
     if (name === '') {
         errorName.innerHTML = "Введите имя"
         return
@@ -97,7 +98,7 @@ returnButton.addEventListener('click', () => {
         message.innerHTML = "Этот игрок не брал игру"
         return
     }
-    
+
     selectedGame.borrower.splice(idx, 1)
     renderGames();
 })
@@ -105,16 +106,16 @@ returnButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
     const nameGameValue = nameGame.value
     const quantityPlayersValue = quantityPlayers.value
-    if (nameGameValue !== '' && quantityPlayersValue > 0) {
+    const quantityCopyValue = quantityCopy.value
+    if (nameGameValue !== '' && quantityPlayersValue > 0 && quantityCopyValue > 0) {
         const newGame = {
             title: nameGameValue,
             players: quantityPlayersValue,
             borrower: [],
-            quantity: quantityPlayersValue
+            quantity: quantityCopyValue
         }
         games.push(newGame)
     }
-    renderGames();
     renderGameOptions();
 })
 
